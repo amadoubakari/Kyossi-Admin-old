@@ -173,7 +173,7 @@ export class InventoryListComponent implements OnInit, AfterViewInit, OnDestroy
                 switchMap((query) => {
                     this.closeDetails();
                     this.isLoading = true;
-                    return this._inventoryService.getProducts(0, 10, 'name', 'asc', query);
+                    return this._inventoryService.getProducts(0, 10, 'data.title', 'asc', query);
                 }),
                 map(() => {
                     this.isLoading = false;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { filter, map, switchMap, take, tap } from 'rxjs/operators';
-import { InventoryBrand, InventoryCategory, InventoryPagination, InventoryProduct, InventoryTag, InventoryVendor } from 'app/modules/admin/apps/ecommerce/inventory/inventory.types';
+import { InventoryBrand, InventoryCategory, InventoryPagination, InventoryProduct, InventoryProduct2, InventoryTag, InventoryVendor } from 'app/modules/admin/apps/ecommerce/inventory/inventory.types';
 
 @Injectable({
     providedIn: 'root'
@@ -123,10 +123,10 @@ export class InventoryService
      * @param order
      * @param search
      */
-    getProducts(page: number = 0, size: number = 10, sort: string = 'name', order: 'asc' | 'desc' | '' = 'asc', search: string = ''):
-        Observable<{ pagination: InventoryPagination; products: InventoryProduct[] }>
+    getProducts(page: number = 0, size: number = 10, sort: string = 'data.title', order: 'asc' | 'desc' | '' = 'asc', search: string = ''):
+        Observable<{ pageable: InventoryPagination; content: InventoryProduct[] }>
     {
-        return this._httpClient.get<{ pagination: InventoryPagination; products: InventoryProduct[] }>('api/apps/ecommerce/inventory/products', {
+        return this._httpClient.get<{ pageable: InventoryPagination; content: InventoryProduct[] }>('http://localhost:8080/notification-service/notification/findAll2', {
             params: {
                 page: '' + page,
                 size: '' + size,
@@ -136,8 +136,9 @@ export class InventoryService
             }
         }).pipe(
             tap((response) => {
-                this._pagination.next(response.pagination);
-                this._products.next(response.products);
+                console.log(response);
+                this._pagination.next(response.pageable);
+                this._products.next(response.content);
             })
         );
     }

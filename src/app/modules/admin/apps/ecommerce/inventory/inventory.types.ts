@@ -1,4 +1,4 @@
-export interface InventoryProduct
+export interface InventoryProduct2
 {
     id: string;
     category?: string;
@@ -21,6 +21,40 @@ export interface InventoryProduct
     active: boolean;
 }
 
+export interface InventoryProduct
+{
+    application: {},
+    data: {
+      content: String,
+      image: String,
+      source: String,
+      sourceIcon: String,
+      subTitle: String,
+      title: String
+    },
+    firebaseNotificationId: String,
+    language: String,
+    sent: boolean,
+    tags?: string[],
+    id: string
+}
+
+export interface InventoryProduct2
+{
+    application: {},
+    data: {
+      content: String,
+      image: String,
+      source: String,
+      sourceIcon: String,
+      subTitle: String,
+      title: String
+    },
+    firebaseNotificationId: String,
+    language: String,
+    sent: boolean,
+}
+
 export interface InventoryPagination
 {
     length: number;
@@ -30,6 +64,8 @@ export interface InventoryPagination
     startIndex: number;
     endIndex: number;
 }
+
+
 
 export interface InventoryCategory
 {
